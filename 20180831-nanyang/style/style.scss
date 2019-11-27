@@ -1,0 +1,98 @@
+@import './common';
+body {
+  background-color: #FCD865;
+}
+
+.wrapper{
+  position: relative;
+}
+
+.main-container {
+  position: relative;
+  img {
+    width: 100%;
+  }
+  .form-container {
+    position: absolute;
+    top: 71.5%;
+    width: 100%;
+    padding: 0 7.3vw;
+    input {
+      display: block;
+      width: 100%;
+      height: px2vw(47);
+      background: #FFFFFF;
+      border: px2vw(1) solid #FC8B22;
+      border-radius: px2vw(100);
+      text-align: center;
+      font-size: px2vw(18);
+    }
+    button {
+      display: block;
+      width: 100%;
+      height: px2vw(47);
+      background: #FC8B22;
+      border-radius: px2vw(100);
+      color: #fff;
+      font-size: px2vw(18);
+      margin-top: 4.7vw;
+    }
+  }
+}
+
+.intro {
+  text-align: center;
+  .intro-img {
+    width: 94%;
+  }
+  .rule {
+    text-align: left;
+    padding-left: 10vw;
+    color: #FC8B22;
+    h5 {
+      margin: 0;
+      font-size: px2vw(14);
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      font-size: px2vw(12);
+    }
+  }
+  .logo {
+    width: px2vw(100);
+    margin: 8vw;
+  }
+}
+
+.go-top {
+  bottom: 8vw;
+  right: 15vw;
+  position: absolute;
+  width: px2vw(35);
+}
+
+.success-page {
+  background-image: url(../img/success.png);
+  min-height: 100vh;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  overflow: hidden;
+  display: none;
+  button {
+    background-image: url(../img/button.png);
+    display: block;
+    width: 91.2%;
+    height: px2vw(48);
+    margin: auto;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    margin-top: 90vw;
+  }
+  img {
+    width: 30%;
+    margin-top: 6vw;
+  }
+}

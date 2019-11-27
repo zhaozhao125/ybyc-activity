@@ -1,0 +1,183 @@
+$color-yellow: #fdd000;
+$color-dark: #3d3d3d;
+$color-gray: #c4c3c3;
+@function vw($px) {
+  @return $px / (375/100) + vw;
+}
+
+html,
+body {
+  // width: 100%;
+  margin: 0;
+  padding: 0;
+  // background-image: url('./img/world-bg.png');
+  // background-size: 100% 100%;
+  // background-attachment: fixed;
+  overflow: scroll;
+  // background-repeat: no-repeat;
+  width: 100%;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+  .lds-ring {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: px2vw(10);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: px2vw(10);
+    box-sizing: content-box;
+  }
+}
+
+.toast {
+  position: fixed;
+  max-width: 80%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 1000;
+  -webkit-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 6px 10px;
+  min-width: 60px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper {
+  width: 100%;
+  .world-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .how-money-icon {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: vw(350);
+    width: vw(248);
+  }
+  .button-content {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 123vw;
+    background-image: url('./img/button-bg.png');
+    background-size: cover;
+    width: vw(310);
+    height: vw(54);
+    text-align: center;
+    color: #fff;
+    line-height: vw(48);
+    font-weight: bold;
+    font-size: vw(16);
+  }
+  .money {
+    position: absolute;
+    // background: red;
+    width: vw(100);
+    text-align: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: vw(402);
+    color: #ffffff;
+    font-size: vw(40.8);
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 999;
+    display: none;
+    &::after {
+      content: '元';
+      font-size: vw(17);
+      font-weight: normal;
+    }
+  }
+  .explain {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: vw(14);
+   
+    width: vw(338);
+   
+    top: 146.6vw;
+    p {
+      color: #ffff;
+      margin: 0;
+      font-size: vw(14);
+      line-height: vw(28);
+      text-indent: vw(-5);
+    }
+  }
+}

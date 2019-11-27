@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>活动二维码生成工具</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Loading Bootstrap -->
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <style>
+  .wrapper {
+    padding: 20px 0;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  a {
+    word-wrap: break-word;
+  }
+
+  .qr-container {
+    text-align: center;
+    display: none;
+  }
+
+  .qr-container p {
+    text-align: center;
+  }
+
+  .url-result {
+    display: block;
+    margin: 10px auto;
+  }
+  .save-tip{
+    display: none;
+  }
+
+  canvas, img {
+    display: block;
+    margin: auto;
+  }
+
+  .download-link {
+    margin-top: 20px;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h4>地推活动二维码生成工具</h4>
+    <div class="container">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">请选择职业类型</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="jobType" id="optionsRadios1" value="qz" checked> 全职
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="jobType" id="optionsRadios2" value="jz"> 兼职
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="worderCode">请输入工号</label>
+          <input type="text" class="form-control" id="worderCode" placeholder="人员工号">
+        </div>
+        <div class="form-group">
+          <label for="worderName">请输入姓名</label>
+          <input type="text" class="form-control" id="worderName" placeholder="姓名">
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="gen-btn">生成</button>
+      </form>
+    </div>
+    <div class="container qr-container">
+      <a href="#" class="url-result" target="_blank"></a>
+      <div id="qrcode"></div>
+      <p>
+        <a href="" download class="download-link btn btn-primary">下载</a>
+        <span class="save-tip">长按图片保存</span>
+      </p>
+    </div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./qrcode.min.js"></script>
+  <script>
+    if(window.navigator.userAgent.match(/mobile|android|iPhone/)){
+      $('.download-link').hide();
+      $('.save-tip').css('display', 'block');
+    }
+  $('#gen-btn').click(function(event) {
+    $('.qr-container').css('display', 'block');
+    var jobType = $('input[name=jobType]:checked').eq(0).val()
+    var code = $('#worderCode').val()
+    var name = $('#worderName').val()
+    var url = 'https://h5.1byongche.com/activity/new-user/?utm_campaign=new_user&utm_medium=ditui&utm_content=uid_' + jobType + code
+    $('.url-result').text(url).attr('href', url);
+    $('#qrcode').html('')
+    new QRCode(document.getElementById("qrcode"), url);
+    setTimeout(function() {
+      $('.download-link').attr({
+        'href': $('#qrcode img').attr('src'),
+        'download': '地推-' + (jobType == 'qz' ? '全职' : '兼职') + '-' + name
+      });
+    }, 10);
+  });
+  </script>
+</body>
+
+</html>

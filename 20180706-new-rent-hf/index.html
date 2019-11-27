@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>百万元邀您体验短长租新功能</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    (function (para) {
+      var p = para.sdk_url,
+        n = para.name,
+        w = window,
+        d = document,
+        s = 'script',
+        x = null,
+        y = null;
+      w['sensorsDataAnalytic201505'] = n;
+      w[n] = w[n] || function (a) {
+        return function () {
+          (w[n]._q = w[n]._q || []).push([a, arguments]);
+        }
+      };
+      var ifs = ['track', 'quick', 'register', 'registerPage', 'registerOnce', 'clearAllRegister', 'trackSignup',
+        'trackAbtest', 'setProfile', 'setOnceProfile', 'appendProfile', 'incrementProfile', 'deleteProfile',
+        'unsetProfile', 'identify', 'login', 'logout', 'trackLink', 'clearAllRegister'
+      ];
+      for (var i = 0; i < ifs.length; i++) {
+        w[n][ifs[i]] = w[n].call(null, ifs[i]);
+      }
+      if (!w[n]._t) {
+        x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+        x.async = 1;
+        x.src = p;
+        y.parentNode.insertBefore(x, y);
+        w[n].para = para;
+      }
+    })({
+      sdk_url: 'https://static.sensorsdata.cn/sdk/1.9.13/sensorsdata.min.js',
+      name: 'sa',
+      server_url: 'http://analysis.1byongche.com:8106/sa?project=production_user',
+      heatmap: {
+        //是否开启点击图，默认 default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭
+        clickmap: 'default',
+        //是否开启触达注意力图，默认 default 表示开启，自动采集 $WebStay 事件，可以设置 'not_collect' 表示关闭
+        scroll_notice_map: 'default'
+      }
+    });
+    sa.quick('autoTrack', {
+      platForm: 'h5'
+    }); //神策系统必须是1.4最新版及以上
+  </script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="top-container">
+      <img src="./img/logo.png" alt="" class="logo">
+      <div class="copy">
+        <h1>暑假出门不被晒，长租优惠真实在</h1>
+        <h2>每天不要99，最低仅需27元/天</h2>
+      </div>
+      <div class="car">
+          <img src="./img/bg.png" alt="">
+      </div>
+    </div>
+    <form>
+      <div class="form-title">领取3100元优惠券</div>
+      <div class="tel-input">
+        <input type="tel" placeholder="请输入手机号加入">
+      </div>
+      <button type="button" class="button button-primary submit-button">立刻领取</button>
+      <a href="https://mp.weixin.qq.com/s/mpA4wL8hIMqkgB1An3J-PA" target="_blank" class="form-link">使用攻略</a>
+    </form>
+    <a href="#" class="rules-link">领取规则></a>
+    <div class="rules">
+      <div class="rules-container">
+        <h3>领取规则</h3>
+        <ul>
+          <li>新老用户输入手机号即可领取；</li>
+          <li>短长租体验券由6张组成；</li>
+          <li>券可抵扣金额在租车时使用，超出部分按所在城市正常标准计费；</li>
+          <li>券有效期为60天；</li>
+          <li>活动时间7月1-31日</li>
+        </ul>
+        <div class="close-btn"></div>
+      </div>
+    </div>
+  </div>
+  <div class="success-page">
+    <img src="./img/success.png" alt="" class="success-img">
+    <button class="button button-primary">打开 / 下载App</button>
+    <button class="button button-default">分享</button>
+  </div>
+  <div class="loading">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="toast">asd</div>
+  <script>
+    var ua = window.navigator.userAgent.toLowerCase();
+    window.platform = {
+      isiPhone: ua.match(/iphone/i) !== null,
+      isAndroid: ua.match(/android/i) !== null
+    }
+    if (window.platform.isiPhone) {
+      document.body.className = 'iphone'
+    } else if (window.platform.isAndroid) {
+      document.body.className = 'android'
+    }
+  </script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script>
+    function wxjssdk() {
+      var user
+      try {
+        user = localStorage ? localStorage.getItem('fifa2018UserId') : null
+        if (user) {
+          user = JSON.parse(user)
+        }
+      } catch (e) {
+
+      }
+      window.wxShareData = {
+        // 分享标题，根据情况修改
+        title: '百万元邀请您体验短长租新功能',
+        // 分享描述，根据情况修改
+        desc: '租车新体验，全城随借随还',
+        // 分享链接，必须与当前页面对应的公众号JS安全域名一致
+        link: location.href,
+        // 分享缩略图参考尺寸300*300，根据情况修改
+        imgUrl: 'https://h5.1byongche.com/static/img/logo.png'
+      };
+      if (user && user.user_id) {
+        window.wxShareData.link = window.wxShareData.link + '?invite=' + user.user_id
+      }
+
+      function configWeixin() {
+        var xmlhttp
+        if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest()
+        } else {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4) {
+            if (xmlhttp.status == 200) {
+              var data = JSON.parse(xmlhttp.responseText);
+              wx.config({
+                // 可以开启debug模式，页面会alert出错误信息
+                debug: false,
+                appId: data.appId,
+                timestamp: data.timestamp,
+                nonceStr: data.noncestr,
+                signature: data.signature,
+                // 配置所需的API列表
+                jsApiList: ['checkJsApi',
+                  'onMenuShareTimeline',
+                  'onMenuShareAppMessage'
+                ]
+              });
+            } else {
+              callback(null)
+            }
+          }
+        }
+        xmlhttp.open("GET", "https://h5.1byongche.com/api/weixin/sign?url=" + encodeURIComponent(location.href.split(
+          '#')[0]), true)
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8")
+        xmlhttp.send()
+      }
+
+      configWeixin()
+
+      wx.ready(function () {
+        // 分享到朋友圈
+        wx.onMenuShareTimeline({
+          title: wxShareData.title,
+          desc: wxShareData.desc,
+          link: wxShareData.link,
+          imgUrl: wxShareData.imgUrl,
+          trigger: function (res) {
+            // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+          },
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+          title: wxShareData.title,
+          desc: wxShareData.desc,
+          link: wxShareData.link,
+          imgUrl: wxShareData.imgUrl,
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+      });
+    }
+
+    wxjssdk();
+  </script>
+  <script>
+    (function () {
+      var $toast = document.querySelector('.toast')
+      toastOpacityTimer = null
+      toastDisplayTimer = null
+
+      function showToast(text) {
+        if (toastOpacityTimer) {
+          clearTimeout(toastOpacityTimer)
+        }
+        if (toastDisplayTimer) {
+          clearTimeout(toastDisplayTimer)
+        }
+        $toast.innerText = text
+        $toast.style.display = 'block'
+        setTimeout(function () {
+          $toast.style.opacity = '1'
+        }, 0);
+        toastOpacityTimer = setTimeout(function () {
+          $toast.style.opacity = '0'
+          toastDisplayTimer = setTimeout(function () {
+            $toast.style.display = 'none'
+          }, 300);
+        }, 3000);
+      }
+
+      function getQuery() {
+        var ret = {}
+        location.search.replace('?', '').split('&').forEach(function (item) {
+          var queryItem = item.split('=')
+          ret[queryItem[0]] = queryItem[1]
+        })
+        return ret
+      }
+
+      var url = 'https://h5.1byongche.com/h5/php/invite/regist-coupons.html'
+      // var url = 'http://47.100.76.78:8085/invite/regist-coupons.html'
+      var $loading = document.querySelector('.loading')
+
+      function checkTel(tel) {
+        var reg = /^((1[1-9][0-9])+\d{8})$/
+        return reg.test(tel)
+      }
+
+      function sendData(data, callback) {
+        $loading.style.display = 'block'
+        var xmlhttp
+        if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest()
+        } else {
+          xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4) {
+            $loading.style.display = 'none'
+            if (xmlhttp.status == 200) {
+              callback(JSON.parse(xmlhttp.responseText))
+            } else {
+              callback(null, xmlhttp.status)
+            }
+          }
+        }
+        var params = ''
+        if (data && typeof data == 'object') {
+          var arr = []
+          Object.keys(data).forEach(function (item) {
+            arr.push(item + '=' + data[item])
+          })
+          params = arr.join('&')
+        }
+        xmlhttp.open('POST', url, true)
+        xmlhttp.setRequestHeader(
+          'Content-type',
+          'application/x-www-form-urlencoded'
+        )
+        xmlhttp.send(params)
+      }
+
+      var $input = document.querySelector('input')
+
+      document.querySelector('.submit-button').addEventListener('click', function (e) {
+        e.preventDefault()
+        var tel = $input.value
+        if (checkTel(tel)) {
+          sendData({
+            phone: tel,
+            utm_campaign: 'new_user_online',
+            utm_medium: '2018_dcz_invite_hf',
+            activity_code: '2018_dcz_invite_hf',
+            certkey: '0p/9olsdfa3#da'
+          }, function (res, err) {
+            if (!res) {
+              showToast('请求出错，请检查网络')
+              return
+            }
+            if (res.code == 0) {
+              showToast('领取成功')
+              document.querySelector('.success-page').style.display = 'block'
+            } else {
+              showToast(res.msg)
+              // document.querySelector('.success-page').style.display = 'block'
+            }
+          })
+        } else {
+          showToast('输入的手机号不合法')
+        }
+        return false
+      }, false)
+      document.querySelector('.rules-link').addEventListener('click', function () {
+        document.querySelector('.rules').style.display = 'flex'
+        return false
+      }, false)
+      document.querySelector('.close-btn').addEventListener('click', function () {
+        document.querySelector('.rules').style.display = 'none'
+        return false
+      }, false)
+      document.querySelector('.rules').addEventListener('click', function () {
+        document.querySelector('.rules').style.display = 'none'
+        return false
+      }, false)
+
+      var $appBtn = document.querySelector('.success-page .button-primary')
+      $appBtn.onclick = function() {
+        window.open('http://a.app.qq.com/o/simple.jsp?pkgname=com.usercar.yongche')
+      }
+
+      // 获取与原生通信的bridge
+      var setupWebViewJavascriptBridge = function (callback) {
+        if (window.WebViewJavascriptBridge) {
+          return callback(window.WebViewJavascriptBridge)
+        } else {
+          document.addEventListener('WebViewJavascriptBridgeReady', function () {
+            callback(window.WebViewJavascriptBridge)
+          }, false)
+        }
+        if (window.WVJBCallbacks) {
+          return window.WVJBCallbacks.push(callback)
+        }
+        window.WVJBCallbacks = [callback]
+        var WVJBIframe = document.createElement('iframe')
+        WVJBIframe.style.display = 'none'
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__'
+        document.documentElement.appendChild(WVJBIframe)
+        setTimeout(function () {
+          document.documentElement.removeChild(WVJBIframe)
+        }, 0)
+      }
+      setupWebViewJavascriptBridge(function (bridge) {
+        if (bridge) {
+          // 显示分享按钮
+          var $shareBtn = document.querySelector('.success-page .button-default')
+          $shareBtn.style.display = 'block'
+          $shareBtn.addEventListener('click', function () {
+            bridge.callHandler('callShare', {
+              url: location.href,
+              shareTitle: '百万元邀您体验短长租新功能',
+              shareContent: '租车新体验，全城随借随还',
+              shareImg: 'https://h5.1byongche.com/static/img/logo.png'
+            })
+          }, false)
+          // 修改下载app按钮
+          var $appBtn = document.querySelector('.success-page .button-primary')
+          $appBtn.innerText = '去用车'
+          $appBtn.onclick = function() {
+            bridge.callHandler('backToHome')
+          }
+        }
+      })
+    })()
+  </script>
+
+</body>
+
+</html>

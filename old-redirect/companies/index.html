@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script>
+    var source = ''
+    if(window.location.search && window.location.search.match('utm_source')){
+      window.location.search.replace('?', '').split('&').forEach(item => {
+        if(item.match('utm_source')){
+          source = item.replace('utm_source=', '')
+        }
+      })
+    }
+    window.location = 'http://h5.1byongche.com/activity/new-user/?utm_campaign=new_user&utm_medium=companies&utm_source=' + source
+  </script>
+  <meta charset="UTF-8">
+  <title>共享汽车 扫我开走</title>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no">
+  <title>一步用车 优免就好</title>
+  <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="main-container">
+      <img src="./img/bg.png" alt="">
+      <div class="form-container">
+        <input class="tel-input" type="tel" placeholder="请输入手机号码">
+        <button class="submit-btn">立即加入</button>
+      </div>
+    </div>
+    <div class="intro">
+      <img src="./img/intro.png" alt="" class="intro-img">
+      <div class="rule">
+        <h5>活动说明</h5>
+        <ul>
+          <li>咨询电话：0377-60933777</li>
+          <li>南阳一步用车科技有限公司有最终解释权</li>
+        </ul>
+      </div>
+      <img src="./img/logo.png" alt="" class="logo">
+    </div>
+    <img src="./img/top.png" alt="" class="go-top">
+  </div>
+  <div class="success-page">
+    <button class="download-btn"></button>
+    <img src="./img/qrcode.png" alt="">
+  </div>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="./script/index.js"></script>
+  <script>
+    (function () {
+      window.initPage({
+        shareTitle: '共享汽车.空降南阳，美好生活，一步到位',
+        shareDesc: '共享出行，优免商家为你保驾护航'
+      })
+
+      var URL = window.env == 'production' ? 'https://h5.1byongche.com/php/invite/regist-coupons.html' :
+        'http://47.100.76.78:8085/invite/regist-coupons.html'
+      var $telInput = $('.tel-input')
+      $('.submit-btn').addEventListener('click', function () {
+        console.log('========', $telInput.value)
+        if (window.checkTel($telInput.value)) {
+          ajax(URL, {
+            method: 'post',
+            loading: true,
+            data: {
+              phone: $telInput.value,
+              certkey: '0p/9olsdfa3#da',
+              utm_campaign:'new_user',
+              utm_medium:'ditui',
+              utm_source:'2018_henan_nanyang'
+            },
+            success: function(res){
+              console.log('====res====', res)
+              if(res.code != 0){
+                if(res.msg == '仅限新用户参与，老用户敬请期待后续活动'){
+                  showToast('已注册一步用车，暂不可参与该活动')
+                }else{
+                  showToast(res.msg || '请求出错')
+                }
+              }else{
+                $('.success-page').style.display = 'block'
+                $('.wrapper').style.display = 'none'
+              }
+            },
+            error: function(res){
+              console.log('====res====', res)
+              showToast('请求出错，请检查网络')
+            }
+          })
+        } else {
+          showToast('请输入正确的手机号')
+        }
+      }, false)
+
+      $('.go-top').addEventListener('click', function () {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }, false)
+
+      $('.download-btn').addEventListener('click', function(){
+        window.location.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.usercar.yongche'
+      })
+
+    })()
+  </script>
+
+</body>
+
+</html>

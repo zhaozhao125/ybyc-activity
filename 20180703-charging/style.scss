@@ -1,0 +1,229 @@
+$color-yellow: #fdd000;
+$color-dark: #3D3D3D;
+$color-gray: #C4C3C3;
+@function px2vw($px) {
+  @return $px / (375/100)+vw;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $color-yellow;
+}
+
+img {
+  width: 100%;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.top-img {
+  width: 100%;
+}
+
+form {
+  width: 88%;
+  margin: 5vw auto;
+  .tel-input {
+    position: relative;
+    input {
+      margin: 0;
+      padding: 0 4vw;
+      border: none;
+      display: block;
+      width: 100%;
+      height: 12vw;
+      color: $color-dark;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 5.8666666vw;
+      border: px2vw(1) solid $color-dark;
+      text-align: center;
+      font-size: 4.6vw;
+      outline: none;
+      &.valid {
+        border: px2vw(2) solid $color-dark;
+      }
+      &::-webkit-input-placeholder {
+        color: #c6c6c6;
+      }
+      &:focus {
+        &::-webkit-input-placeholder {
+          opacity: 0;
+        }
+        &+.flash {
+          display: none;
+        }
+      }
+    }
+    .flash {
+      width: px2vw(2);
+      position: absolute;
+      width: px2vw(2);
+      height: 12vw;
+      top: 0;
+      left: 22vw;
+      background-color: $color-yellow;
+      padding: 2vw 0;
+      background-clip: content-box;
+      animation-name: flash;
+      animation-duration: 1000ms;
+      animation-delay: 0ms;
+      animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+      animation-iteration-count: infinite;
+    }
+  }
+  .button-container {
+    margin-top: 3vw;
+    .submit-btn {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.charge-process {
+  margin-top: 2vw;
+}
+
+.rules {
+  padding-left: 5vw;
+  width: 90%;
+  margin: 5vw auto;
+  color: #3d3d3d;
+  h3 {
+    font-size: 3.6vw;
+    margin: 2vw 0 0;
+  }
+  ul {
+    font-size: 3vw;
+    padding: 0;
+    margin: 1vw 0 3vw;
+  }
+}
+
+.back-to-top {
+  position: absolute;
+  width: 45px;
+  right: 20px;
+  bottom: 10px;
+}
+
+.success-page {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fdd000;
+  text-align: center;
+  .success-btn{
+    width: 90%;
+  }
+}
+
+.loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+  .lds-ring {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: px2vw(10);
+    background-color: rgba(0, 0, 0, .5);
+    padding: px2vw(10);
+    box-sizing: content-box;
+  }
+}
+
+.toast {
+  position: fixed;
+  max-width: 80%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .7);
+  color: #fff;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 1000;
+  -webkit-transition: opacity .3s linear;
+  transition: opacity .3s linear;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 6px 10px;
+  min-width: 60px;
+  display: none;
+  opacity: 0;
+  transition: opacity .2s ease-out;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

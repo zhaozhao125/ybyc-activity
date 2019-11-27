@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <title>世界杯最高人气奖</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    (function (para) {
+      var p = para.sdk_url,
+        n = para.name,
+        w = window,
+        d = document,
+        s = 'script',
+        x = null,
+        y = null;
+      w['sensorsDataAnalytic201505'] = n;
+      w[n] = w[n] || function (a) {
+        return function () {
+          (w[n]._q = w[n]._q || []).push([a, arguments]);
+        }
+      };
+      var ifs = ['track', 'quick', 'register', 'registerPage', 'registerOnce', 'clearAllRegister', 'trackSignup',
+        'trackAbtest', 'setProfile', 'setOnceProfile', 'appendProfile', 'incrementProfile', 'deleteProfile',
+        'unsetProfile', 'identify', 'login', 'logout', 'trackLink', 'clearAllRegister'
+      ];
+      for (var i = 0; i < ifs.length; i++) {
+        w[n][ifs[i]] = w[n].call(null, ifs[i]);
+      }
+      if (!w[n]._t) {
+        x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+        x.async = 1;
+        x.src = p;
+        y.parentNode.insertBefore(x, y);
+        w[n].para = para;
+      }
+    })({
+      sdk_url: 'https://static.sensorsdata.cn/sdk/1.9.13/sensorsdata.min.js',
+      name: 'sa',
+      server_url: 'http://analysis.1byongche.com:8106/sa?project=production_user',
+      heatmap: {
+        //是否开启点击图，默认 default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭
+        clickmap: 'default',
+        //是否开启触达注意力图，默认 default 表示开启，自动采集 $WebStay 事件，可以设置 'not_collect' 表示关闭
+        scroll_notice_map: 'default'
+      }
+    });
+    sa.quick('autoTrack', {
+      platForm: 'h5'
+    }); //神策系统必须是1.4最新版及以上
+  </script>
+</head>
+<!-- http://test.1byongche.cn/h5/activity/20180718-worldcup-prize/index.html -->
+
+<body>
+  <div class="wrapper">
+    <img src="./img/world-bg.png" class="world-bg" alt="">
+    <img alt="" class="how-money-icon">
+    <h3 class="money">-</h3>
+    <span class="button-content">立即瓜分</span>
+    <div class="explain" style="color: #ffffff;opacity: 0.6;">
+      <p>奖励规则：</p>
+      <p>1.所有用户都可以参与瓜分，每个用户只能瓜分一次</p>
+      <p>2.参与世界杯人气活动的用户会领取到更高金额的红包</p>
+      <p>3.领取的红包奖励可以在“我的钱包”-“红包”中查看</p>
+      <p>4.红包目前只能转为赠送余额，不能提现</p>
+      <p>5.该活动周期为7天，从2018年7月19日至2018年7月25日，活动结束后，如用户未领取，视为自动放弃该奖项，不能再领取</p>
+    </div>
+  </div>
+
+  <div class="loading">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="toast">asd</div>
+  <script>
+    (function () {
+      var $toast = document.querySelector('.toast')
+      toastOpacityTimer = null
+      toastDisplayTimer = null
+
+      /**
+       * 显示toast
+       * @param  {String} text 显示的文字
+       */
+      function showToast(text) {
+        if (toastOpacityTimer) {
+          clearTimeout(toastOpacityTimer)
+        }
+        if (toastDisplayTimer) {
+          clearTimeout(toastDisplayTimer)
+        }
+        $toast.innerText = text
+        $toast.style.display = 'block'
+        setTimeout(function () {
+          $toast.style.opacity = '1'
+        }, 0);
+        toastOpacityTimer = setTimeout(function () {
+          $toast.style.opacity = '0'
+          toastDisplayTimer = setTimeout(function () {
+            $toast.style.display = 'none'
+          }, 300);
+        }, 3000);
+      }
+
+      function getQuery() {
+        var ret = {}
+        location.search.replace('?', '').split('&').forEach(function (item) {
+          var queryItem = item.split('=')
+          ret[queryItem[0]] = queryItem[1]
+        })
+        return ret
+      }
+
+      /**
+       * 显示隐藏loading
+       * 显示：loading.show()
+       * 隐藏：loading.hide()
+       */
+      var loading = (function () {
+        var $loading = document.querySelector('.loading')
+        return {
+          show: function () {
+            $loading.style.display = 'block'
+          },
+          hide: function () {
+            $loading.style.display = 'none'
+          }
+        }
+      })()
+
+      var $loading = document.querySelector('.loading')
+      // 发送请求的url
+      // var url = 'https://h5.1byongche.com/h5/php/invite/regist-coupons.html'
+      // var url = 'http://47.100.76.78:8085/v26/fifa/user-accept-prize-times'
+      // 发送请求
+      function sendData(data, url, callback) {
+        $loading.style.display = 'block'
+        var xmlhttp
+        if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest()
+        } else {
+          xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4) {
+            $loading.style.display = 'none'
+            if (xmlhttp.status == 200) {
+              callback(JSON.parse(xmlhttp.responseText))
+            } else {
+              callback(null, xmlhttp.status)
+            }
+          }
+        }
+        var params = ''
+        if (data && typeof data == 'object') {
+          var arr = []
+          Object.keys(data).forEach(function (item) {
+            arr.push(item + '=' + data[item])
+          })
+          params = arr.join('&')
+        }
+        xmlhttp.open('POST', url, true)
+        xmlhttp.setRequestHeader(
+          'Content-type',
+          'application/x-www-form-urlencoded'
+        )
+        xmlhttp.send(params)
+      }
+      var sign
+      var userid
+
+      document.querySelector('.button-content').addEventListener('click', function () {
+        console.log(sign)
+        // 领取过了
+        if (sign) {
+          // window.location.href = 'http://test.1byongche.cn/h5/app/main/#/wallet/red-packet'
+          window.location.href = 'https://h5.1byongche.com/app/main/#/wallet/red-packet'
+          return
+        }
+        // 领取红包
+        sendData({
+          userid: userid || '124080',
+          certkey: '0p/9olsdfa3#da'
+        }, 'http://wx.1byongche.com/invite/accept-prize.html', function (res, err) {
+          if (!res) {
+            showToast('请求出错，请检查网络')
+            return
+          }
+          // 领取成功
+          if (res.errCode == 0) {
+            showToast(res.errMsg)
+            // 领取过
+            handleHtml(res.data.bonus)
+          } else if (res.errCode == -1) {
+            // 活动过期
+            showToast(res.errMsg)
+          }
+        })
+      }, false)
+
+      function getAcceptAjax(userid) {
+        // alert(userid)
+        sendData({
+          userid: userid || '124080',
+          certkey: '0p/9olsdfa3#da'
+        }, 'http://wx.1byongche.com/invite/user-accept-prize-times.html', function (res, err) {
+          if (!res) {
+            showToast('请求出错，请检查网络')
+            return
+          }
+          if (res.errCode === -1) {
+            handleHtml(res.data.bonus)
+          } else {
+            document.querySelector('.how-money-icon').src = './img/how-money.png'
+          }
+        })
+      }
+      // getAcceptAjax()
+
+
+      function handleHtml(moneyNum) {
+        document.querySelector('.button-content').innerHTML = '领取成功，查看红包余额'
+        var moneyIcon = document.querySelector('.how-money-icon')
+        var money = document.querySelector('.money')
+        moneyIcon.src = './img/envelope.png'
+        moneyIcon.style.width = '33.8vw'
+        money.style.display = 'block'
+        money.innerHTML = moneyNum
+        sign = true
+        loading.hide()
+      }
+      // 获取与原生通信的bridge
+      var setupWebViewJavascriptBridge = function (callback) {
+
+        if (window.WebViewJavascriptBridge) {
+          return callback(window.WebViewJavascriptBridge)
+        } else {
+          document.addEventListener('WebViewJavascriptBridgeReady', function () {
+            callback(window.WebViewJavascriptBridge)
+          }, false)
+        }
+        if (window.WVJBCallbacks) {
+          return window.WVJBCallbacks.push(callback)
+        }
+        window.WVJBCallbacks = [callback]
+        var WVJBIframe = document.createElement('iframe')
+        WVJBIframe.style.display = 'none'
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__'
+        document.documentElement.appendChild(WVJBIframe)
+        setTimeout(function () {
+          document.documentElement.removeChild(WVJBIframe)
+        }, 0)
+      }
+      setupWebViewJavascriptBridge(function (bridge) {
+        if (bridge) {
+          // 获取用户信息
+          bridge.callHandler('getUser', {}, function (res) {
+
+            var user
+            if (typeof res === 'string') {
+              user = JSON.parse(res)
+            } else {
+              user = res
+            }
+            // alert(JSON.stringify(res))
+            console.log(user)
+            if (user && user.userId) {
+              userid = user.userId
+              getAcceptAjax(user.userId)
+            }
+          })
+        }
+      })
+    })()
+  </script>
+</body>
+
+</html>
